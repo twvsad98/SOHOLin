@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">SOHO</string>
+    <string name="電子郵件">電子郵件</string>
+    <string name="確認電子郵件">確認電子郵件</string>
+    <string name="密碼">密碼</string>
+    <string name="姓名">姓名</string>
+    <string name="性別">性別</string>
+    <string name="男">男</string>
+    <string name="女">女</string>
+    <string name="註冊">註冊</string>
+    <string name="以FACEBOOK帳戶註冊">以FACEBOOK帳戶註冊</string>
 </resources>
