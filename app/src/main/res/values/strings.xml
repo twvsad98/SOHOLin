@@ -9,4 +9,22 @@
     <string name="女">女</string>
     <string name="註冊">註冊</string>
     <string name="以FACEBOOK帳戶註冊">以FACEBOOK帳戶註冊</string>
+    <string name="person_info">個人資料</string>
+    <string name="etName">姓名</string>
+    <string name="etCompany">公司</string>
+    <string name="etWorkExperience">工作經歷</string>
+    <string name="etExpertise">專長</string>
+    <string name="etLive">居住地</string>
+    <string name="etPhone">聯絡電話</string>
+    <string name="etLine">Line</string>
+    <string name="cag_nav_home">Home</string>
+    <string name="cag_nav_member">Member</string>
+    <string name="cag_nav_message">Message</string>
+    <string name="cag_nav_settings">Setting</string>
+    <string name="cag_nav_case">Case</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_Home">Home</string>
+
 </resources>
