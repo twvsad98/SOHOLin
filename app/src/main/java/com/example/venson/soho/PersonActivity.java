@@ -28,7 +28,7 @@ public class PersonActivity extends AppCompatActivity {
                     switchFragment(fragment);
                     setTitle(R.string.cag_nav_message);
                     return true;
-                case R.id.cag_item_Case:
+                case R.id.cag_item_case:
                     fragment = new CaseFragment();
                     switchFragment(fragment);
                     setTitle(R.string.cag_nav_case);
