@@ -9,11 +9,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.venson.soho.Case.CaseFragment;
+import com.example.venson.soho.Home.HomeFragment;
+import com.example.venson.soho.Member.UserFragment;
+import com.example.venson.soho.Message.MessageFragment;
+import com.example.venson.soho.Setting.SettingsFragment;
+
 public class PersonActivity extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
+//
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment;
@@ -56,9 +62,6 @@ public class PersonActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.person_layout);
-
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.cag_bottomNavigation);
-        navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 
         initContent();
     }
