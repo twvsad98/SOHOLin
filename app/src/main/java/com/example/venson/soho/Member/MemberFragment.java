@@ -14,7 +14,7 @@ public class MemberFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.member_layout, container, false);
+        View view = inflater.inflate(R.layout.person_layout, container, false);
         return view;
     }
 
