@@ -1,10 +1,9 @@
-package com.example.venson.soho.caseapply;
+package com.example.venson.soho.Case.caseapply;
 
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.widget.Switch;
 
 public class PageAdapter extends FragmentPagerAdapter {
 

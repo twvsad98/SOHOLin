@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:layout_margin="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        app:cardCornerRadius="5dp"
+        >
+
+        <RelativeLayout
+            android:layout_margin="5dp"
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/case_name_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="案件名稱"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:id="@+id/case_content_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:text="內容: "
+                android:textSize="18sp"
+                android:layout_below="@+id/case_name_id"
+                />
+
+            <TextView
+                android:id="@+id/case_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/case_content_id"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/case_content_id"
+                android:text="內容"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/case_pay_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:text="接案預算: "
+                android:textSize="18sp"
+                android:layout_below="@id/case_content_id"
+                />
+
+            <TextView
+                android:id="@+id/case_pay_min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/case_pay_id"
+                android:layout_alignBottom="@+id/case_pay_id"
+                android:layout_toEndOf="@+id/case_pay_id"
+                android:layout_margin="2dp"
+                android:text="預算"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/case_pay_max"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignBaseline="@id/case_pay_min"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@+id/case_pay_min"
+                android:text="預算"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/case_date_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:text="招募期限: "
+                android:textSize="18sp"
+                android:layout_below="@id/case_pay_id"
+                />
+
+            <TextView
+                android:id="@+id/case_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/case_date_id"
+                android:layout_alignBottom="@+id/case_date_id"
+                android:layout_toEndOf="@+id/case_name_id"
+                android:layout_margin="2dp"
+                android:text="日期"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/case_skill_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:text="所需技能: "
+                android:textSize="18sp"
+                android:layout_below="@id/case_date_id"
+                />
+
+            <TextView
+                android:id="@+id/case_skill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/case_skill_id"
+                android:layout_alignBottom="@+id/case_skill_id"
+                android:layout_alignStart="@+id/case_date"
+                android:layout_margin="2dp"
+                android:text="所需技能"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/case_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/case_date"
+                android:layout_alignParentEnd="true"
+                android:layout_alignBaseline="@id/case_pay_id"
+                android:layout_marginEnd="20dp"
+                android:text="案件地點"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                />
+
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

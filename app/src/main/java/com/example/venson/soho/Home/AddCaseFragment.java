@@ -51,7 +51,7 @@ public class AddCaseFragment extends Fragment {
         add_cancel_id.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ///
+                
             }
         });
         return view;

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/add_relativeLayout"
+    >
+
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/title_tool_bar"
+        />
+
+    <RelativeLayout
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tool_bar"
+        android:id="@+id/relativeLayout2">
+
+        <TextView
+            android:id="@+id/add_data_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="資料"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/add_case"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/add_case_id"
+            android:layout_alignBottom="@+id/add_case_id"
+            android:layout_toEndOf="@+id/add_case_id"
+            android:layout_marginStart="2dp"
+            android:hint="案件"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/add_case_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/add_category_id"
+            android:layout_below="@+id/add_data_id"
+            android:paddingStart="30dp"
+            android:text="案件: "
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/add_category_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="類型: "
+            android:layout_below="@+id/add_case_id"
+            android:textSize="18sp"
+            android:layout_margin="5dp"
+            android:paddingStart="30dp"
+            />
+
+        <EditText
+            android:id="@+id/add_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/add_category_id"
+            android:layout_alignBottom="@+id/add_category_id"
+            android:layout_toEndOf="@+id/add_category_id"
+            android:paddingStart="2dp"
+            android:hint="類型"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/add_content_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="內容: "
+            android:layout_below="@id/add_category_id"
+            android:textSize="18sp"
+            android:layout_margin="5dp"
+            android:paddingStart="30dp"
+            />
+
+        <EditText
+            android:id="@+id/add_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/add_content_id"
+            android:layout_alignBottom="@+id/add_content_id"
+            android:layout_toEndOf="@+id/add_content_id"
+            android:paddingStart="2dp"
+            android:hint="內容"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/add_time_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="時間"
+            android:layout_below="@id/add_content"
+            android:layout_marginTop="40dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/add_release_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="發布日: "
+            android:layout_below="@id/add_time_id"
+            android:textSize="18sp"
+            android:paddingStart="30dp"
+            android:layout_margin="5dp"
+            />
+
+        <EditText
+            android:id="@+id/add_release"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/add_release_id"
+            android:layout_alignBottom="@+id/add_release_id"
+            android:layout_toEndOf="@+id/add_release_id"
+            android:paddingStart="2dp"
+            android:hint="發布日"
+            android:inputType="date"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/add_expire_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="到期日: "
+            android:layout_below="@id/add_release_id"
+            android:textSize="18sp"
+            android:paddingStart="30dp"
+            android:layout_margin="5dp"
+            />
+
+        <EditText
+            android:id="@+id/add_expire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/add_expire_id"
+            android:layout_alignBottom="@+id/add_expire_id"
+            android:layout_toEndOf="@+id/add_expire_id"
+            android:paddingStart="2dp"
+            android:inputType="date"
+            android:hint="到期日"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/add_budget_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="預算"
+            android:paddingStart="2dp"
+            android:layout_marginTop="40dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_below="@id/add_expire_id"
+            />
+        <EditText
+            android:id="@+id/add_etBudget_min"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/add_budget_id"
+            android:layout_marginStart="60dp"
+            android:textSize="18sp"
+            />
+        <TextView
+            android:id="@+id/add_to_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/add_etBudget_min"
+            android:layout_centerHorizontal="true"
+            android:text="～"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/add_etBudget_mix"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_alignBaseline="@+id/add_to_id"
+            android:layout_alignBottom="@+id/add_to_id"
+            android:layout_marginStart="40dp"
+            android:textSize="18sp"
+            android:layout_toEndOf="@+id/add_to_id" />
+
+        <TextView
+            android:id="@+id/add_location_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="地點"
+            android:layout_below="@id/add_to_id"
+            android:layout_marginTop="40dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+
+        <Spinner
+            android:id="@+id/spinner_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/add_location_id"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="200dp"
+            >
+
+        </Spinner>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <ImageButton
+            android:id="@+id/add_done_id"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ic_done_black_24dp" />
+
+        <ImageButton
+            android:id="@+id/add_cancel_id"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignBottom="@+id/add_done_id"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/ic_close_black_24dp" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
