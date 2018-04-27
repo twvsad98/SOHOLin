@@ -65,7 +65,7 @@ public class BottomNavigation extends Fragment {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             super.onCreateView(inflater, container, savedInstanceState);
-            View view = inflater.inflate(R.layout.bottom, container, false);
+            View view = inflater.inflate(R.layout.bottom_layout, container, false);
             bottomNavigation = view.findViewById(R.id.bottomNavigation_id);
             bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
             disableShiftMode(bottomNavigation);

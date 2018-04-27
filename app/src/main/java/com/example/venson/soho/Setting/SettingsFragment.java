@@ -1,5 +1,4 @@
-package com.example.venson.soho.caseapply;
-
+package com.example.venson.soho.Setting;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,23 +8,16 @@ import android.view.ViewGroup;
 
 import com.example.venson.soho.R;
 
-
 /**
- * A simple {@link Fragment} subclass.
+ * Created by ricky on 2018/4/21.
  */
-public class PostCaseFragment extends Fragment {
 
-
-    public PostCaseFragment() {
-        // Required empty public constructor
-    }
-
-
+public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_post_case, container, false);
+        super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.settings_fragment, container, false);
+        return view;
     }
-
 }

@@ -1,4 +1,4 @@
-package com.example.venson.soho.caseapply;
+package com.example.venson.soho.Case.caseapply;
 
 
 import android.os.Bundle;
@@ -13,10 +13,10 @@ import com.example.venson.soho.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ApplicationCaseFragment extends Fragment {
+public class PostCaseFragment extends Fragment {
 
 
-    public ApplicationCaseFragment() {
+    public PostCaseFragment() {
         // Required empty public constructor
     }
 
@@ -25,7 +25,7 @@ public class ApplicationCaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_application_case, container, false);
+        return inflater.inflate(R.layout.fragment_post_case, container, false);
     }
 
 }

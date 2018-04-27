@@ -1,10 +1,12 @@
-package com.example.venson.soho;
+package com.example.venson.soho.Message;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.venson.soho.R;
 
 /**
  * Created by ricky on 2018/4/21.

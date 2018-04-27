@@ -8,8 +8,6 @@
     android:orientation="vertical">
 
 
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -17,8 +15,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
-
             android:orientation="vertical">
 
             <android.support.v7.widget.Toolbar
@@ -192,26 +188,6 @@
 
         </LinearLayout>
     </ScrollView>
-
-    <FrameLayout
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_weight="1" >
-
-
-    <android.support.design.widget.BottomNavigationView
-            android:id="@+id/cag_bottomNavigation"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_gravity="bottom"
-            android:background="@color/colorPrimary"
-            app:menu="@menu/category_nav_item">
-
-    </android.support.design.widget.BottomNavigationView>
-    </FrameLayout>
-
 
 
 </LinearLayout>
