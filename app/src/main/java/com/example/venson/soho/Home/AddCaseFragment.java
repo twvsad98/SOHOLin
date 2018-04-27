@@ -51,14 +51,11 @@ public class AddCaseFragment extends Fragment {
         add_cancel_id.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().onBackPressed();
+                //
             }
         });
         return view;
     }
-
-
-
 
     private void findViews(View view) {
         spinner = view.findViewById(R.id.spinner_id);
