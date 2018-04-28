@@ -24,7 +24,6 @@ import com.example.venson.soho.R;
 
 public class AddCaseFragment extends Fragment {
     private Spinner spinner;
-    private Toolbar toolbar;
     private TextView tvToolbar_title;
     private EditText add_case,add_cagetory,add_content,add_release,add_expire;
     private ImageButton add_done_id, add_cancel_id;
@@ -43,7 +42,6 @@ public class AddCaseFragment extends Fragment {
         tvToolbar_title.setText(R.string.add_case_title);
 
         // toolbar done and cancel
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         add_done_id.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,7 +51,6 @@ public class AddCaseFragment extends Fragment {
         add_cancel_id.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().popBackStack();
             }
         });
         return view;
@@ -61,7 +58,6 @@ public class AddCaseFragment extends Fragment {
 
     private void findViews(View view) {
         spinner = view.findViewById(R.id.spinner_id);
-        toolbar = view.findViewById(R.id.tool_bar);
         tvToolbar_title = view.findViewById(R.id.tvTool_bar_title);
         add_done_id = view.findViewById(R.id.add_done_id);
         add_cancel_id = view.findViewById(R.id.add_cancel_id);
