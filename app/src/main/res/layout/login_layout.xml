@@ -107,6 +107,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:padding="5dp"
+            android:onClick="lookOnClick"
             />
 
     </LinearLayout>

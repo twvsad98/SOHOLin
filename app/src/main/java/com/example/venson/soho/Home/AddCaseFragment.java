@@ -28,6 +28,8 @@ public class AddCaseFragment extends Fragment {
     private TextView tvToolbar_title;
     private EditText add_case,add_cagetory,add_content,add_release,add_expire;
     private ImageButton add_done_id, add_cancel_id;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,7 +53,7 @@ public class AddCaseFragment extends Fragment {
         add_cancel_id.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //
+                getFragmentManager().popBackStack();
             }
         });
         return view;

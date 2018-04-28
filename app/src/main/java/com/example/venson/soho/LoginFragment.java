@@ -1,8 +1,12 @@
 package com.example.venson.soho;
 
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,17 +21,19 @@ public class LoginFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.login_layout,container ,false);
+        View view = inflater.inflate(R.layout.login_layout, container, false);
         login_look = view.findViewById(R.id.login_look);
         login_look.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = new HomeFragment();
-                getFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
+                Fragment fragment = new BottomNavigation();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction =
+                        fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content, fragment);
+                fragmentTransaction.commit();
             }
         });
-        return  view;
+        return view;
     }
-
-
 }
