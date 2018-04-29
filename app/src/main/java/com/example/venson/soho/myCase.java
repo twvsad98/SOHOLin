@@ -1,24 +1,30 @@
-package com.example.venson.soho.Home;
+package com.example.venson.soho;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
-public class Case implements Serializable {
+public class myCase implements Serializable{
 	int id;
 	double budget;
 	String name;
+	String skill;
+	String location;
 	String description;
 	Date recruit_start;
 	Date recruit_end;
-	
-	public Case(int id, double budget, String name, String description, Date recruit_start, Date recruit_end) {
-		super();
+	String category;
+
+	public myCase(int id, double budget, String name, String skill, String location,
+				  String description, Date recruit_start, Date recruit_end, String category) {
 		this.id = id;
 		this.budget = budget;
 		this.name = name;
+		this.skill = skill;
+		this.location = location;
 		this.description = description;
 		this.recruit_start = recruit_start;
 		this.recruit_end = recruit_end;
+		this.category = category;
 	}
 
 	public int getId() {
@@ -45,6 +51,22 @@ public class Case implements Serializable {
 		this.name = name;
 	}
 
+	public String getSkill() {
+		return skill;
+	}
+
+	public void setSkill(String skill) {
+		this.skill = skill;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -68,7 +90,12 @@ public class Case implements Serializable {
 	public void setRecruit_end(Date recruit_end) {
 		this.recruit_end = recruit_end;
 	}
-	
-	
-	
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
 }

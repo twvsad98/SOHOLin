@@ -1,19 +1,14 @@
 package com.example.venson.soho;
 
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
-import com.example.venson.soho.Home.AddCaseFragment;
-import com.example.venson.soho.Home.HomeFragment;
 
 public class LoginFragment extends Fragment {
     private Button login_look;

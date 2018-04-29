@@ -21,9 +21,14 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.venson.soho.Common;
-import com.example.venson.soho.Home.CategoryTab.GetAllFragment;
+import com.example.venson.soho.Home.CategoryTab.DesignFragment;
+import com.example.venson.soho.Home.CategoryTab.MediaFragment;
+import com.example.venson.soho.Home.CategoryTab.NetWorkFragment;
+import com.example.venson.soho.Home.CategoryTab.SalesFragment;
+import com.example.venson.soho.Home.CategoryTab.ServiceFragment;
 import com.example.venson.soho.Home.CategoryTab.TranslationFragment;
+import com.example.venson.soho.myCase;
+import com.example.venson.soho.Common;
 import com.example.venson.soho.MyTask;
 import com.example.venson.soho.R;
 import com.google.gson.Gson;
@@ -32,8 +37,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 
 
@@ -55,13 +58,13 @@ public class HomeFragment extends Fragment {
         setHasOptionsMenu(true);
         toolbar.setTitle("");
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeRefreshLayout.setRefreshing(true);
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
+//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                swipeRefreshLayout.setRefreshing(true);
+//                swipeRefreshLayout.setRefreshing(false);
+//            }
+//        });
         showAllCases();
         getCag_tablayout();
         getCase_mamber_tabLayout();
@@ -71,9 +74,45 @@ public class HomeFragment extends Fragment {
 
     public TabLayout getCag_tablayout() {
         cag_tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
+            Fragment fragment;
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Toast.makeText(getActivity(), tab.getText(), Toast.LENGTH_SHORT).show();
+                switch (tab.getPosition()){
+                    case 0:
+                        return;
+                    case 1:
+                        fragment = new TranslationFragment();
+                        switchFragment(fragment);
+                        Toast.makeText(getActivity(), tab.getText(), Toast.LENGTH_SHORT).show();
+                        return;
+                    case 2:
+                        fragment = new DesignFragment();
+                        Toast.makeText(getActivity(), tab.getText(), Toast.LENGTH_SHORT).show();
+                        switchFragment(fragment);
+                        return;
+                    case 3:
+                        fragment = new SalesFragment();
+                        switchFragment(fragment);
+                        Toast.makeText(getActivity(), tab.getText(), Toast.LENGTH_SHORT).show();
+                        return;
+                    case 4:
+                        fragment = new MediaFragment();
+                        switchFragment(fragment);
+                        Toast.makeText(getActivity(), tab.getText(), Toast.LENGTH_SHORT).show();
+                        return;
+                    case 5:
+                        fragment = new NetWorkFragment();
+                        switchFragment(fragment);
+                        Toast.makeText(getActivity(), tab.getText(), Toast.LENGTH_SHORT).show();
+                        return;
+                    case 6:
+                        fragment = new ServiceFragment();
+                        switchFragment(fragment);
+                        Toast.makeText(getActivity(), tab.getText(), Toast.LENGTH_SHORT).show();
+                        return;
+
+                }
             }
 
             @Override
@@ -110,11 +149,11 @@ public class HomeFragment extends Fragment {
         return case_mamber_tabLayout;
     }
 
-    
+
     private void showAllCases() {
         if (Common.networkConnected(getActivity())) {
             String url = Common.URL + "/CaseServlet";
-            List<Case> cases = null;
+            List<myCase> myCases = null;
             Gson gson = new GsonBuilder().setDateFormat("yyy-MM-dd HH:mm:ss").create();
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "getAll");
@@ -123,17 +162,16 @@ public class HomeFragment extends Fragment {
             try {
                 String jsonIn = caseGetAllTask.execute().get();
                 Log.d(TAG, jsonIn);
-                Type listType = new TypeToken<List<Case>>() {
+                Type listType = new TypeToken<List<myCase>>() {
                 }.getType();
-                cases = new Gson().fromJson(jsonIn, listType);
-                gson.fromJson(jsonObject, listType);
+                myCases = gson.fromJson(jsonIn, listType);
             } catch (Exception e) {
                 Log.e(TAG, e.toString());
             }
-            if (cases == null || cases.isEmpty()) {
+            if (myCases == null || myCases.isEmpty()) {
                 Common.showToast(getActivity(), R.string.msg_NoCases);
             } else {
-                rvCase.setAdapter(new HomeCaseAdapter(cases, getContext()));
+                rvCase.setAdapter(new HomeCaseAdapter(myCases, getContext()));
 
             }
         } else {
@@ -156,7 +194,7 @@ public class HomeFragment extends Fragment {
                 return true;
 
             case R.id.toolbar_item_add:
-                Fragment fragment = new AddCaseFragment();
+                Fragment fragment = new CaseInsertFragment();
                 getFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
                 return true;
 
@@ -180,11 +218,11 @@ public class HomeFragment extends Fragment {
 
     private class HomeCaseAdapter extends RecyclerView.Adapter<HomeCaseAdapter.MyViewHoler> {
         private LayoutInflater layoutInflater;
-        private List<Case> cases;
+        private List<myCase> myCases;
 
-        HomeCaseAdapter(List<Case> cases, Context context) {
+        HomeCaseAdapter(List<myCase> myCases, Context context) {
             layoutInflater = LayoutInflater.from(context);
-            this.cases = cases;
+            this.myCases = myCases;
         }
         class MyViewHoler extends RecyclerView.ViewHolder {
             TextView case_cotent,case_pay_min,case_date,case_skill,case_location,case_name_id;
@@ -207,20 +245,34 @@ public class HomeFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(MyViewHoler myViewHoler, int position) {
-         final Case myCase = cases.get(position);
+         final myCase myCase = myCases.get(position);
          myViewHoler.case_name_id.setText(myCase.getName());
          myViewHoler.case_cotent.setText(myCase.getDescription());
-         myViewHoler.case_pay_min.setText((int) myCase.getBudget());
-         myViewHoler.case_date.setText((CharSequence) myCase.getRecruit_start());
-//         myViewHoler.case_skill.setText();
-//         myViewHoler.case_location.setText();
+         myViewHoler.case_pay_min.setText(String.valueOf(myCase.getBudget()));
+         myViewHoler.case_date.setText(String.valueOf(myCase.getRecruit_start()));
+         myViewHoler.case_skill.setText(myCase.getSkill());
+         myViewHoler.case_location.setText(myCase.getLocation());
         }
 
         @Override
         public int getItemCount() {
-            return cases.size();
+            return myCases.size();
         }
     }
 
+    private void switchFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.case_fragment_container, fragment);
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (caseGetAllTask != null) {
+            caseGetAllTask.cancel(true);
+        }
+    }
 
 } //end
