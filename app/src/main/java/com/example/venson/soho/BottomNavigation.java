@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.venson.soho.Case.CaseFragment;
+import com.example.venson.soho.Home.CategoryTab.GetAllFragment;
 import com.example.venson.soho.Home.HomeFragment;
 import com.example.venson.soho.Member.UserFragment;
 import com.example.venson.soho.Message.MessageFragment;

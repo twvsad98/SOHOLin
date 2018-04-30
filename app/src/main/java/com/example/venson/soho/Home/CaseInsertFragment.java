@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -30,9 +31,9 @@ import java.util.Date;
 
 public class CaseInsertFragment extends Fragment {
     private final static String TAG = "CaseInsertFragment";
-    private Spinner spinner;
+    private Spinner citySpinner, cagetorySpinner;
     private TextView tvToolbar_title;
-    private EditText add_case,add_cagetory,add_content,add_release,add_expire,add_budget,add_skill;
+    private EditText add_case, add_content, add_release, add_expire, add_budget, add_skill;
     private ImageButton add_done_id, add_cancel_id;
     private Calendar calendar = Calendar.getInstance();
 
@@ -42,10 +43,15 @@ public class CaseInsertFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.add_case_layout, container, false);
         findViews(view);
+        setHasOptionsMenu(true);
         // Spinner
-        final ArrayAdapter<CharSequence> cityAdapter = ArrayAdapter.createFromResource(
-                getActivity(), R.array.city, android.R.layout.simple_spinner_item );
-        spinner.setAdapter(cityAdapter);
+        ArrayAdapter<CharSequence> cagetoryAdapter = ArrayAdapter.createFromResource(
+                getActivity(), R.array.cagetory, android.R.layout.simple_spinner_item);
+        cagetorySpinner.setAdapter(cagetoryAdapter);
+        ArrayAdapter<CharSequence> cityAdapter = ArrayAdapter.createFromResource(
+                getActivity(), R.array.city, android.R.layout.simple_spinner_item);
+        citySpinner.setAdapter(cityAdapter);
+
         setHasOptionsMenu(true);
         tvToolbar_title.setText(R.string.add_case_title);
         add_release.setOnClickListener(new View.OnClickListener() {
@@ -82,16 +88,15 @@ public class CaseInsertFragment extends Fragment {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                String cagetory = cagetorySpinner.getSelectedItem().toString();
+                String city = citySpinner.getSelectedItem().toString();
                 String caseTitle = add_case.getText().toString().trim();
-                String cagetory = add_cagetory.getText().toString().trim();
                 String content = add_content.getText().toString().trim();
                 String skill = add_skill.getText().toString().trim();
-
                 int budget = Integer.parseInt(add_budget.getText().toString().trim());
-                String city = spinner.getSelectedItem().toString();
                 if (Common.networkConnected(getActivity())) {
                     String url = Common.URL + "/CaseServlet";
-                    myCase myCase = new myCase(0,budget,caseTitle,skill,city,content,release,expire,cagetory);
+                    myCase myCase = new myCase(0, budget, caseTitle, skill, city, content, release, expire, cagetory);
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action", "caseInsert");
                     jsonObject.addProperty("case", new Gson().toJson(myCase));
@@ -125,23 +130,23 @@ public class CaseInsertFragment extends Fragment {
     DatePickerDialog.OnDateSetListener datepicker = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                calendar.set(Calendar.YEAR, year);
-                calendar.set(Calendar.MONTH, month);
-                calendar.set(Calendar.DAY_OF_MONTH, day);
-                String dateFormat = "yyyy-MM-dd";
-                SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-                add_release.setText(sdf.format(calendar.getTime()));
-                add_expire.setText(sdf.format(calendar.getTime()));
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, month);
+            calendar.set(Calendar.DAY_OF_MONTH, day);
+            String dateFormat = "yyyy-MM-dd";
+            SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+            add_release.setText(sdf.format(calendar.getTime()));
+            add_expire.setText(sdf.format(calendar.getTime()));
         }
     };
 
     private void findViews(View view) {
-        spinner = view.findViewById(R.id.spinner_id);
+        citySpinner = view.findViewById(R.id.spinner_city_id);
         tvToolbar_title = view.findViewById(R.id.tvTool_bar_title);
         add_done_id = view.findViewById(R.id.add_done_id);
         add_cancel_id = view.findViewById(R.id.add_cancel_id);
         add_case = view.findViewById(R.id.add_case);
-        add_cagetory = view.findViewById(R.id.add_category);
+        cagetorySpinner = view.findViewById(R.id.spinner_cagetory_id);
         add_content = view.findViewById(R.id.add_content);
         add_release = view.findViewById(R.id.add_release);
         add_expire = view.findViewById(R.id.add_expire);
