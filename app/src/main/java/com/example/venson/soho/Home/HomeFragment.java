@@ -1,6 +1,5 @@
 package com.example.venson.soho.Home;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -8,9 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,9 +14,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v7.widget.Toolbar;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.venson.soho.Case.CaseFragment;
+import com.example.venson.soho.Home.Case_Member_Tab.HomeCaseFragment;
+import com.example.venson.soho.Home.Case_Member_Tab.HomeMemberFragment;
 import com.example.venson.soho.Home.CategoryTab.DesignFragment;
 import com.example.venson.soho.Home.CategoryTab.GetAllFragment;
 import com.example.venson.soho.Home.CategoryTab.MediaFragment;
@@ -28,20 +26,7 @@ import com.example.venson.soho.Home.CategoryTab.NetWorkFragment;
 import com.example.venson.soho.Home.CategoryTab.SalesFragment;
 import com.example.venson.soho.Home.CategoryTab.ServiceFragment;
 import com.example.venson.soho.Home.CategoryTab.TranslationFragment;
-import com.example.venson.soho.myCase;
-import com.example.venson.soho.Common;
-import com.example.venson.soho.MyTask;
 import com.example.venson.soho.R;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 
 public class HomeFragment extends Fragment {
@@ -49,8 +34,6 @@ public class HomeFragment extends Fragment {
     private Toolbar toolbar;
     private TabLayout cag_tablayout,case_mamber_tabLayout;
     private SwipeRefreshLayout swipeRefreshLayout;
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -116,6 +99,32 @@ public class HomeFragment extends Fragment {
                         switchFragment(fragment);
                         Toast.makeText(getActivity(), tab.getText(), Toast.LENGTH_SHORT).show();
                         return;
+                }
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+        return cag_tablayout;
+    }
+
+    public TabLayout getCase_mamber_tabLayout() {
+        case_mamber_tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            Fragment fragment;
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()) {
+                    case 0:
+                        fragment = new HomeCaseFragment();
+                        switchFragment(fragment);
+                        return;
+                    case 1:
+                        fragment = new HomeMemberFragment();
+                        switchFragment(fragment);
+                        return;
 
                 }
             }
@@ -130,31 +139,8 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
-        return cag_tablayout;
-    }
-
-    public TabLayout getCase_mamber_tabLayout() {
-        case_mamber_tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                Toast.makeText(getActivity(), tab.getText(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
         return case_mamber_tabLayout;
     }
-
-
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -172,7 +158,11 @@ public class HomeFragment extends Fragment {
 
             case R.id.toolbar_item_add:
                 Fragment fragment = new CaseInsertFragment();
-                getFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
                 return true;
 
             case R.id.toolbar_item_filter:
