@@ -4,8 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.venson.soho.Common;
+import com.example.venson.soho.Home.CaseDetailFragment;
 import com.example.venson.soho.MyTask;
 import com.example.venson.soho.R;
 import com.example.venson.soho.myCase;
@@ -28,9 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by venson on 2018/4/28.
- */
+
 
 public class GetAllFragment extends Fragment {
     private static final String TAG = "getAllCaseFragment";
@@ -51,7 +48,7 @@ public class GetAllFragment extends Fragment {
     private void showAllCases() {
         if (Common.networkConnected(getActivity())) {
             String url = Common.URL + "/CaseServlet";
-            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
             List<myCase> myCases = null;
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "getAll");
@@ -109,7 +106,7 @@ public class GetAllFragment extends Fragment {
         public void onBindViewHolder(MyViewHolder myViewHolder, int position) {
             final myCase myCase = myCases.get(position);
             Date date = myCase.getRecruit_start();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             String dateStr = dateFormat.format(date);
             myViewHolder.case_name_id.setText(myCase.getName());
             myViewHolder.case_cotent.setText(myCase.getDescription());
@@ -117,6 +114,16 @@ public class GetAllFragment extends Fragment {
             myViewHolder.case_date.setText(dateStr);
             myViewHolder.case_skill.setText(myCase.getSkill());
             myViewHolder.case_location.setText(myCase.getLocation());
+            myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Fragment fragment = new CaseDetailFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("myCase", myCase);
+                    fragment.setArguments(bundle);
+                    getFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
+                }
+            });
         }
 
         @Override
@@ -130,5 +137,7 @@ public class GetAllFragment extends Fragment {
          rvGetAll = view.findViewById(R.id.rvGetAll);
 
     }
+
+
 
 } // end
