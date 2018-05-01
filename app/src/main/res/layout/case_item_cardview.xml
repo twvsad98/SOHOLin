@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
-                android:text="發佈日: "
+                android:text="發布時間: "
                 android:textSize="18sp"
                 android:layout_below="@id/case_pay_id"
                 />

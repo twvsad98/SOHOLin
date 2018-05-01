@@ -12,12 +12,12 @@ import com.example.venson.soho.R;
  * Created by ricky on 2018/4/21.
  */
 
-public class UserFragment extends Fragment {
+public class CaseOverViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.user_fragment, container, false);
+        View view = inflater.inflate(R.layout.case_overview_fragment, container, false);
         return view;
     }
 }

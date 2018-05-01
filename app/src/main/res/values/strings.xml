@@ -21,7 +21,7 @@
     <string name="cag_nav_member">Member</string>
     <string name="cag_nav_message">Message</string>
     <string name="cag_nav_settings">Setting</string>
-    <string name="cag_nav_case">myCase</string>
+    <string name="cag_nav_case">Case</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -38,6 +38,8 @@
     <string name="msg_NoNetwork">未連結到網路</string>
     <string name="msg_InsertFail">新增失敗</string>
     <string name="msg_InsertSuccess">新增成功</string>
+    <string name="case_detail">案件說明</string>
+    <string name="msg_NoMember">無任何會員</string>
 
     <string-array name="city">
         <item>臺北市</item>

@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class myCase implements Serializable{
 	int id;
-	double budget;
+	int budget;
 	String name;
 	String skill;
 	String location;
@@ -13,9 +13,9 @@ public class myCase implements Serializable{
 	Date recruit_start;
 	Date recruit_end;
 	String category;
+	String user_name;
 
-	public myCase(int id, double budget, String name, String skill, String location,
-				  String description, Date recruit_start, Date recruit_end, String category) {
+	public myCase(int id, int budget, String name, String skill, String location, String description, Date recruit_start, Date recruit_end, String category, String user_name) {
 		this.id = id;
 		this.budget = budget;
 		this.name = name;
@@ -25,6 +25,7 @@ public class myCase implements Serializable{
 		this.recruit_start = recruit_start;
 		this.recruit_end = recruit_end;
 		this.category = category;
+		this.user_name = user_name;
 	}
 
 	public int getId() {
@@ -35,11 +36,11 @@ public class myCase implements Serializable{
 		this.id = id;
 	}
 
-	public double getBudget() {
+	public int getBudget() {
 		return budget;
 	}
 
-	public void setBudget(double budget) {
+	public void setBudget(int budget) {
 		this.budget = budget;
 	}
 
@@ -97,5 +98,13 @@ public class myCase implements Serializable{
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
 	}
 }

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,6 +18,7 @@ import com.example.venson.soho.Common;
 import com.example.venson.soho.Home.CaseDetailFragment;
 import com.example.venson.soho.MyTask;
 import com.example.venson.soho.R;
+import com.example.venson.soho.MemberClass;
 import com.example.venson.soho.myCase;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -31,9 +34,9 @@ import java.util.List;
 
 public class GetAllFragment extends Fragment {
     private static final String TAG = "getAllCaseFragment";
-    private MyTask caseGetAllTask, caseDeleteTask;
+    private MyTask caseGetAllTask;
     private RecyclerView rvGetAll;
-
+    private MemberClass user;
 
     @Nullable
     @Override
@@ -78,17 +81,17 @@ public class GetAllFragment extends Fragment {
         private LayoutInflater layoutInflater;
         private List<myCase> myCases;
 
-        public getAllCaseAdapter(List<myCase> myCases, Context context) {
+         getAllCaseAdapter(List<myCase> myCases, Context context) {
             layoutInflater = LayoutInflater.from(context);
             this.myCases = myCases;
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder {
-            TextView case_cotent,case_pay_min,case_date,case_skill,case_location,case_name_id;
-            public MyViewHolder(View itemView) {
+            TextView case_content,case_pay_min,case_date,case_skill,case_location,case_name_id;
+             MyViewHolder(View itemView) {
                 super(itemView);
                 case_name_id = itemView.findViewById(R.id.case_name_id);
-                case_cotent = itemView.findViewById(R.id.case_content);
+                case_content = itemView.findViewById(R.id.case_content);
                 case_pay_min = itemView.findViewById(R.id.case_pay_min);
                 case_date = itemView.findViewById(R.id.case_date);
                 case_skill = itemView.findViewById(R.id.case_skill);
@@ -109,7 +112,7 @@ public class GetAllFragment extends Fragment {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             String dateStr = dateFormat.format(date);
             myViewHolder.case_name_id.setText(myCase.getName());
-            myViewHolder.case_cotent.setText(myCase.getDescription());
+            myViewHolder.case_content.setText(myCase.getDescription());
             myViewHolder.case_pay_min.setText(String.valueOf(myCase.getBudget()));
             myViewHolder.case_date.setText(dateStr);
             myViewHolder.case_skill.setText(myCase.getSkill());
@@ -121,7 +124,12 @@ public class GetAllFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("myCase", myCase);
                     fragment.setArguments(bundle);
-                    getFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.content, fragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+
                 }
             });
         }

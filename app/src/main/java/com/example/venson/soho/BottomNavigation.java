@@ -16,10 +16,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.venson.soho.Case.CaseFragment;
-import com.example.venson.soho.Home.CategoryTab.GetAllFragment;
 import com.example.venson.soho.Home.HomeFragment;
-import com.example.venson.soho.Member.UserFragment;
+import com.example.venson.soho.Member.CaseOverViewFragment;
+import com.example.venson.soho.Member.MemberFragment;
 import com.example.venson.soho.Message.MessageFragment;
 import com.example.venson.soho.Setting.SettingsFragment;
 
@@ -44,11 +43,11 @@ public class BottomNavigation extends Fragment {
                     switchFragment(fragment);
                     return true;
                 case R.id.cag_item_case:
-                    fragment = new CaseFragment();
+                    fragment = new CaseOverViewFragment();
                     switchFragment(fragment);
                     return true;
                 case R.id.cag_item_Member:
-                    fragment = new UserFragment();
+                    fragment = new MemberFragment();
                     switchFragment(fragment);
                     return true;
                 case R.id.cag_item_Settimg:
@@ -73,8 +72,7 @@ public class BottomNavigation extends Fragment {
             initContent();
             return view;
         }
-
-
+    
         private void initContent() {
             Fragment fragment = new HomeFragment();
             switchFragment(fragment);
