@@ -34,6 +34,7 @@
     <string name="processing">進行中</string>
     <string name="ending">已結案</string>
     <string name="add_case_title">新增案件</string>
+    <string name="確認密碼">確認密碼</string>
 
     <string-array name="city">
         <item>臺北市</item>

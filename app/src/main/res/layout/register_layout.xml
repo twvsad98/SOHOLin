@@ -23,21 +23,21 @@
                 android:inputType="text" />
 
             <EditText
-                android:id="@+id/etConfirmEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:ems="10"
-                android:hint="@string/確認電子郵件"
-                android:inputType="text" />
-
-            <EditText
-                android:id="@+id/etPassWord"
+                android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:ems="10"
                 android:hint="@string/密碼"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/etConfirmPassWord"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:ems="10"
+                android:hint="@string/確認密碼"
                 android:inputType="textPassword" />
 
             <EditText
