@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -22,36 +23,44 @@
         >
 
         <android.support.design.widget.TabItem
+            android:id="@+id/allCase_tabItem"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="全部案件"
+
             />
         <android.support.design.widget.TabItem
+            android:id="@+id/translation_tabItem"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="文字編輯及翻譯"
             />
         <android.support.design.widget.TabItem
+            android:id="@+id/design_tabItem"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="網頁設計及開發"
             />
         <android.support.design.widget.TabItem
+            android:id="@+id/sales_tabItem"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="企劃行銷及銷售"
             />
         <android.support.design.widget.TabItem
+            android:id="@+id/media_tabItem"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="平面設計及多媒體 "
             />
         <android.support.design.widget.TabItem
+            android:id="@+id/network_tabItem"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="網路及軟體設計"
             />
         <android.support.design.widget.TabItem
+            android:id="@+id/service_tabItem"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="服務支援與代工"
@@ -62,29 +71,45 @@
     <android.support.design.widget.TabLayout
         android:id="@+id/case_mamber_tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/cag_tablayout"
         >
 
         <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
+            android:id="@+id/case_tab_id"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="找案件"
 
             />
         <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
+            android:id="@+id/member_tab_id"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="找人才"
             />
 
     </android.support.design.widget.TabLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+
+<FrameLayout
+    android:id="@+id/case_fragment_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/case_mamber_tabLayout"
+    >
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_below="@+id/case_mamber_tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvCase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+</FrameLayout>
 
 </RelativeLayout>
