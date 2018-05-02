@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CaseApplyActivity extends AppCompatActivity {
-
+//
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
