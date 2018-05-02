@@ -66,5 +66,12 @@
         <item>金門縣</item>
         <item>連江縣</item>
     </string-array>
-
+    <string-array name="category">
+        <item>文字編輯及翻譯</item>
+        <item>網頁設計及開發</item>
+        <item>企劃行銷及銷售</item>
+        <item>平面設計及多媒體 </item>
+        <item>網路及軟體設計</item>
+        <item>服務支援與代工</item>
+    </string-array>
 </resources>
