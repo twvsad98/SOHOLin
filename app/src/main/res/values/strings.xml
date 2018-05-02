@@ -34,6 +34,13 @@
     <string name="processing">進行中</string>
     <string name="ending">已結案</string>
     <string name="add_case_title">新增案件</string>
+    <string name="msg_NoCases">無任何案子</string>
+    <string name="msg_NoNetwork">未連結到網路</string>
+    <string name="msg_InsertFail">新增失敗</string>
+    <string name="msg_InsertSuccess">新增成功</string>
+    <string name="case_detail">案件說明</string>
+    <string name="msg_NoMember">無任何會員</string>
+    <string name="確認密碼">確認密碼</string>
 
     <string-array name="city">
         <item>臺北市</item>

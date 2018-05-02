@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginRight="6dp"
+    android:paddingTop="16dp">
+
+
+    <ImageView
+        android:id="@+id/ivChatUserProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/chat_user_profile"
+        android:layout_alignParentLeft="true"/>
+
+
+    <TextView
+        android:id="@+id/tvChatUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="bob"
+        android:textColor="#990000"
+        android:textSize="20sp"
+        android:layout_toRightOf="@+id/ivChatUserProfile"
+        android:layout_marginLeft="12dp"/>
+    <android.support.v7.widget.CardView
+        android:id="@+id/cdChatMessageL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvChatUserName"
+        android:layout_toRightOf="@+id/ivChatUserProfile"
+        android:layout_marginLeft="12dp"
+        android:elevation="13dp"
+        app:cardCornerRadius="5dp"
+        app:cardBackgroundColor="#ffffff">
+    <TextView
+        android:id="@+id/tvChatMessageL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test     yommmmmmmmm"
+        android:textColor="#990000"
+        android:textSize="20sp"
+        />
+
+    </android.support.v7.widget.CardView>
+    <TextView
+        android:id="@+id/tvChatMessageTL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/cdChatMessageL"
+        android:text="11:40"
+        android:layout_alignBottom="@id/cdChatMessageL"
+        android:layout_marginLeft="4dp"
+        />
+</RelativeLayout>

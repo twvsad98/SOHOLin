@@ -2,10 +2,13 @@ package com.example.venson.soho.Case;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.venson.soho.Home.CategoryTab.GetAllFragment;
 import com.example.venson.soho.R;
 
 /**
@@ -18,6 +21,10 @@ public class CaseFragment extends Fragment {
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.case_fragment, container, false);
+
         return view;
     }
+
+
+
 }
