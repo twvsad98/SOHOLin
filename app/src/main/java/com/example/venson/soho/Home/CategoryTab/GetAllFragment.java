@@ -31,7 +31,7 @@ import java.util.Date;
 import java.util.List;
 
 
-
+//
 public class GetAllFragment extends Fragment {
     private static final String TAG = "getAllCaseFragment";
     private MyTask caseGetAllTask;
@@ -109,7 +109,7 @@ public class GetAllFragment extends Fragment {
         public void onBindViewHolder(MyViewHolder myViewHolder, int position) {
             final myCase myCase = myCases.get(position);
             Date date = myCase.getRecruit_start();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String dateStr = dateFormat.format(date);
             myViewHolder.case_name_id.setText(myCase.getName());
             myViewHolder.case_content.setText(myCase.getDescription());
