@@ -4,19 +4,32 @@
     android:layout_height="wrap_content"
     android:padding="2dp">
 
+    <ImageView
+        android:id="@+id/ivChatUserProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/chat_user_profile"
+        android:layout_alignParentLeft="true"/>
+
+
+    <TextView
+        android:id="@+id/tvChatUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="bob"
+        android:textColor="#990000"
+        android:textSize="20sp"
+        android:layout_toRightOf="@+id/ivChatUserProfile"
+        android:layout_marginLeft="12dp"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true">
+        android:layout_marginLeft="12dp"
+        android:layout_toRightOf="@+id/ivChatUserProfile"
+        android:layout_below="@+id/tvChatUserName"
+        >
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="Test"
-            android:textColor="#990000"
-            android:textSize="20sp" />
+
 
         <ImageView
             android:id="@+id/imageView"

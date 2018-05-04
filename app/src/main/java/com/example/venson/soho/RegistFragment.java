@@ -14,10 +14,13 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.example.venson.soho.Common.Common;
+
 import com.example.venson.soho.Home.HomeFragment;
+import com.example.venson.soho.LoginRegist.CommonTask;
+import com.example.venson.soho.LoginRegist.UserExistTask;
 import com.example.venson.soho.LoginRegist.UserRegistTask;
 import com.example.venson.soho.Member.User;
+import com.google.gson.JsonObject;
 
 import java.util.concurrent.ExecutionException;
 
@@ -25,10 +28,12 @@ public class RegistFragment extends Fragment {
     private final static String TAG = "RegistFragment";
     private EditText etEmail, etPassword, etConfirmPassword, etName;
     private Button btRegister;
-    private boolean userExit = false;
+    private boolean userExist = false;
     boolean isInputValid = true;
     private RadioGroup rgSex;
     private int gender =1;
+    private CommonTask emailCheckTask;
+
 
     @Nullable
     @Override
@@ -40,7 +45,6 @@ public class RegistFragment extends Fragment {
         etName = view.findViewById(R.id.etName);
         btRegister = view.findViewById(R.id.btRegister);
         rgSex = view.findViewById(R.id.rgSex);
-
         rgSex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -52,6 +56,35 @@ public class RegistFragment extends Fragment {
                     gender = 0;
                     Log.d(TAG,"gender=0");
                 }
+
+            }
+        });
+
+        etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus){
+
+                        String url = Common.URL + "/Login_RegistServlet";
+                        JsonObject jsonObject = new JsonObject();
+                        jsonObject.addProperty("action", "userExist");
+                        jsonObject.addProperty("userId", etEmail.getText().toString());
+                        String jsonOut = jsonObject.toString();
+                        emailCheckTask = new CommonTask(url, jsonOut);
+                        try {
+                            String result = emailCheckTask.execute().get();
+                            userExist = Boolean.valueOf(result);
+                        } catch (Exception e) {
+                            Log.e(TAG, e.toString());
+                        }
+
+                        if (userExist) {
+                           etEmail.setError("email is exist");
+                           isInputValid = false;
+                        }else{
+                            isInputValid = true;
+                        }
+                    }
 
             }
         });
@@ -68,9 +101,13 @@ public class RegistFragment extends Fragment {
                 String name = etName.getText().toString().trim();
 
 
-                if (userExit) {
+                if(!isVaildEmailFormat(email)){
+                    etEmail.setError("invaild email address");
                     isInputValid = false;
+                } else {
+                    isInputValid = true;
                 }
+
                 if (email.isEmpty()) {
 
                     isInputValid = false;
@@ -115,6 +152,14 @@ public class RegistFragment extends Fragment {
 
 
         return view;
+    }
+    private boolean isVaildEmailFormat(String email)
+    {
+
+        if (email == null) {
+            return false;
+        }
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(etEmail.getText().toString()).matches();
     }
 
 
