@@ -8,11 +8,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft_17;
 import org.java_websocket.handshake.ServerHandshake;
+
 import java.net.URI;
 import java.nio.ByteBuffer;
 import java.util.Locale;
@@ -24,7 +27,7 @@ public class ChatWebSocketClient extends WebSocketClient {
     public static String friendInChatEM;
 
     public ChatWebSocketClient(URI serverURI, Context context) {
-        super(serverURI,new Draft_17());
+        super(serverURI, new Draft_17());
         this.context = context;
         gson = new Gson();
     }
@@ -35,27 +38,30 @@ public class ChatWebSocketClient extends WebSocketClient {
                 "onOpen:Http status code = %d; status message = %s",
                 handshakedata.getHttpStatus(),
                 handshakedata.getHttpStatusMessage());
-        Log.d(TAG,"onOpen:"+text);
+        Log.d(TAG, "onOpen:" + text);
     }
 
     @Override
     public void onMessage(String message) {
-        Log.d(TAG,"onMessage:"+message);
-        JsonObject jsonObject = gson.fromJson(message,JsonObject.class);
+
+        JsonObject jsonObject = gson.fromJson(message, JsonObject.class);
         String type = jsonObject.get("type").getAsString();
 
-        if (type.equals("chat")){
-            ChatMessage chatMessage = gson.fromJson(message,ChatMessage.class);
-            String text = "sender_em:"+chatMessage.getSender_em()+
+        if (type.equals("chat")) {
+            ChatMessage chatMessage = gson.fromJson(message, ChatMessage.class);
+            String text = "sender_em:" + chatMessage.getSender_em() +
                     "\nfriendInChat: " + friendInChatEM;
-            Log.d(TAG,text);
-            if (friendInChatEM == null || !friendInChatEM.equals(chatMessage.getSender_em())){
+            Log.d(TAG, text);
+            if (friendInChatEM == null || !friendInChatEM.equals(chatMessage.getSender_em())) {
                 showNotification(chatMessage);
                 return;
             }
         }
-        sendMessageBroadcast(type,message);
+        Log.d(TAG, "onMessage:" + message);
+        sendMessageBroadcast(type, message);
+
     }
+
     @Override
     public void onMessage(ByteBuffer bytes) {
         int length = bytes.array().length;
@@ -85,25 +91,25 @@ public class ChatWebSocketClient extends WebSocketClient {
     }
 
     private void showNotification(ChatMessage chatMessage) {
-        Intent intent = new Intent(context,ChatActivity.class);
+        Intent intent = new Intent(context, ChatActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("friend",chatMessage.getSender_em());
-        bundle.putString("messageType",chatMessage.getMessageType());
-        bundle.putString("messageContent",chatMessage.getContent());
+        bundle.putString("friend_em", chatMessage.getSender_em());
+        bundle.putString("messageType", chatMessage.getMessageType());
+        bundle.putString("messageContent", chatMessage.getContent());
         intent.putExtras(bundle);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context,0,
-                intent,PendingIntent.FLAG_UPDATE_CURRENT);
-       Notification notification = new Notification.Builder(context)
-               .setContentTitle("message from"+chatMessage.getSender_em())
-               .setSmallIcon(android.R.drawable.ic_menu_info_details)
-               .setAutoCancel(true)
-               .setContentIntent(pendingIntent)
-               .build();
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Notification notification = new Notification.Builder(context)
+                .setContentTitle("message from" + chatMessage.getSender_em())
+                .setSmallIcon(android.R.drawable.ic_menu_info_details)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .build();
 
         NotificationManager notificationManager
-                =(NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        if (notificationManager!= null){
-            notificationManager.notify(0,notification);
+                = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (notificationManager != null) {
+            notificationManager.notify(0, notification);
         }
 
     }

@@ -5,9 +5,11 @@
     android:padding="2dp">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true">
+        android:layout_alignParentRight="true"
+        >
 
 
         <ImageView
@@ -15,6 +17,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
+            android:src="@drawable/chat_user_profile"
            />
+
     </LinearLayout>
+    <TextView
+        android:id="@+id/tvChatMessageT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/linearLayout"
+        android:text="11:40"
+        android:layout_alignBottom="@id/linearLayout"
+
+        />
 </RelativeLayout>

@@ -28,7 +28,7 @@ public class RegistFragment extends Fragment {
     private final static String TAG = "RegistFragment";
     private EditText etEmail, etPassword, etConfirmPassword, etName;
     private Button btRegister;
-    private boolean userExist = false;
+    private boolean userEmailExist = false;
     boolean isInputValid = true;
     private RadioGroup rgSex;
     private int gender =1;
@@ -60,34 +60,39 @@ public class RegistFragment extends Fragment {
             }
         });
 
-        etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus){
-
+//        etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (!hasFocus){
+                        String email = etEmail.getText().toString();
+                        String password = etPassword.getText().toString();
                         String url = Common.URL + "/Login_RegistServlet";
                         JsonObject jsonObject = new JsonObject();
                         jsonObject.addProperty("action", "userExist");
-                        jsonObject.addProperty("userId", etEmail.getText().toString());
+                        jsonObject.addProperty("email", email);
+                        jsonObject.addProperty("password", password);
                         String jsonOut = jsonObject.toString();
                         emailCheckTask = new CommonTask(url, jsonOut);
                         try {
                             String result = emailCheckTask.execute().get();
-                            userExist = Boolean.valueOf(result);
+                            userEmailExist = Boolean.valueOf(result);
                         } catch (Exception e) {
                             Log.e(TAG, e.toString());
                         }
 
-                        if (userExist) {
-                           etEmail.setError("email is exist");
-                           isInputValid = false;
+                        if (userEmailExist) {
+                           etEmail.setError("email or password is exist");
+                           etPassword.setError("email or password is exist");
                         }else{
                             isInputValid = true;
                         }
-                    }
+//                    }
 
-            }
-        });
+//            }
+//        });
+
+
+
 
 
 
@@ -105,6 +110,11 @@ public class RegistFragment extends Fragment {
                     etEmail.setError("invaild email address");
                     isInputValid = false;
                 } else {
+                    isInputValid = true;
+                }
+                if (userEmailExist){
+                    isInputValid = false;
+                }else{
                     isInputValid = true;
                 }
 

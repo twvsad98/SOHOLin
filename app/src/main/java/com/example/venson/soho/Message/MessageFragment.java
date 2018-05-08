@@ -4,7 +4,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +25,8 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by ricky on 2018/4/21.
  */
@@ -32,11 +36,13 @@ public class MessageFragment extends Fragment {
     private RecyclerView rvFriends;
     private LocalBroadcastManager localBroadcastManager;
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,@Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         MainActivity activity = (MainActivity) getActivity();
+
 
         View view = inflater.inflate(R.layout.message_fragment, container, false);
 
@@ -45,6 +51,8 @@ public class MessageFragment extends Fragment {
         rvFriends = view.findViewById(R.id.recyclerView);
         rvFriends.setLayoutManager(new LinearLayoutManager(activity));
         rvFriends.setAdapter(new FriendAdapter(activity));
+        String email = getUserEM();
+        Common.connectServer(email,activity);
 
 
         return view;
@@ -91,7 +99,7 @@ public class MessageFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(FriendViewHolder holder, int position) {
-            final String friend_em = Common.getFriendList().get(position);
+            final String friend_em= Common.getFriendList().get(position);
 
             holder.tvUserName.setText(friend_em);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -110,11 +118,11 @@ public class MessageFragment extends Fragment {
 
     }
 
-
+////////////////加入朋友列表
     private class FriendStateReceiver extends BroadcastReceiver {
         MainActivity activity;
 
-        public FriendStateReceiver(MainActivity activity) {
+        FriendStateReceiver(MainActivity activity) {
             this.activity = activity;
         }
 
@@ -124,35 +132,49 @@ public class MessageFragment extends Fragment {
             StateMessage stateMessage = new Gson().fromJson(message, StateMessage.class);
             String type = stateMessage.getType();
             String friend_em = stateMessage.getUserEmail();
-            String friend = friend_em;
-            int user_id = 1;
+            Log.d(TAG,"FRIEND_EM"+friend_em);
+            String userEM = getUserEM();
+            Log.d(TAG,"userEM"+userEM);
             switch (type) {
                 case "open":
-                    if (friend_em.equals(user_id)) {
-                        // 取得server上的所有user
-                        List<String> friendList = new ArrayList<>(stateMessage.getUserEmails());
-                        Common.setFriendList(friendList);
-                        // 將自己從聊天清單中移除，否則會看到自己在聊天清單上
-                        friendList.remove(user_id);
-                    } else {
-                        // 如果其他user連線而且清單上沒有該user，就將該user新增至目前聊天清單上
-                        if (!Common.getFriendList().contains(friend_em)) {
-                            Common.getFriendList().add(friend_em);
-                        }
-                        Common.showToast(activity, friend + " is online");
-                    }
-                    // 重刷聊天清單
+                    List<String> friendlist = new ArrayList<>(stateMessage.getUserEmails());
+                    Log.d(TAG,"getfriendlist");
+                    friendlist.remove(userEM);
+                    Log.d(TAG,"remove userEM");
+                    Common.setFriendList(friendlist);
+                    Log.d(TAG,"setfriendlist");
+
                     rvFriends.getAdapter().notifyDataSetChanged();
+//                    if (friend_em.equals(userEM)) {
+//
+//                        List<String> friendList = new ArrayList<>(stateMessage.getUserEmails());
+//                        Common.setFriendList(friendList);
+//
+//                        friendList.remove(userEM);
+//                    } else {
+//
+//                        if (!Common.getFriendList().contains(friend_em)) {
+//                            Common.getFriendList().add(friend_em);
+//                        }
+//                    }
                     break;
 
 
                 case "close":
+                    Common.getFriendList().remove(friend_em);
                     rvFriends.getAdapter().notifyDataSetChanged();
-                    Common.showToast(activity, friend + " is offline");
+                    Common.showToast(activity, friend_em + " is offline");
                     break;
             }
             Log.d(TAG, "message: " + message);
             Log.d(TAG, "friendList: " + Common.getFriendList());
         }
+    }
+
+    public String getUserEM() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Common.PREF_FILE, MODE_PRIVATE);
+        String userEmail = sharedPreferences.getString("email", "");
+        Log.d(TAG, "userEmail:" + userEmail);
+        return userEmail;
     }
 }

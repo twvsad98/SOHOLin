@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.venson.soho.Home.HomeFragment;
 import com.example.venson.soho.LoginRegist.UserExistTask;
+import com.example.venson.soho.Message.MessageFragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -40,6 +41,8 @@ public class LoginFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+        final MainActivity activity = (MainActivity) getActivity();
+
 
         ////////////登入按鈕  檢查 成功 進入主頁
         btLogin = view.findViewById(R.id.login_btLogin);
@@ -56,16 +59,16 @@ public class LoginFragment extends Fragment {
                     return;
                 }
                 if (isUser(email, password)) {
-                    /////////////////////
                     SharedPreferences preferences = getActivity().getSharedPreferences(
                             Common.PREF_FILE, MODE_PRIVATE);
                     preferences.edit().putBoolean("login", true)
                             .putString("email", email)
                             .putString("password", password).apply();
-                    ////////////////////
+
                     getActivity().setResult(Activity.RESULT_OK);
-                    Fragment fragment = new HomeFragment();
-                    getFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.content, fragment).commit();
+                    Fragment fragment = new MessageFragment();
+                    getFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
+
                 } else {
                     tvEmail.setError("email or passwrod is wrong");
                     tvPassword.setError(" email or password is wrong");
