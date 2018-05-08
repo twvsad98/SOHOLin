@@ -3,50 +3,56 @@ package com.example.venson.soho.Home;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.text.InputType;
 import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.venson.soho.CaseCategory;
+import com.example.venson.soho.CaseCompany;
+import com.example.venson.soho.CaseTag;
+import com.example.venson.soho.Category;
 import com.example.venson.soho.Common;
+import com.example.venson.soho.Company;
 import com.example.venson.soho.MyTask;
 import com.example.venson.soho.R;
 import com.example.venson.soho.myCase;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 
 public class CaseInsertFragment extends Fragment {
     private final static String TAG = "CaseInsertFragment";
     private Spinner citySpinner;
-    private TextView tvToolbar_title, detail_tvUser, add_tvCategory;
-    private Button add_btCagetory;
-    private EditText add_case, add_content,add_expire, add_budget, add_skill;
+    private TextView tvToolbar_title, detail_tvUser, add_tvCategory, add_tvCompany;
+    private Button add_btCagetory,add_btCompany;
+    private EditText add_case, add_content,add_expire, add_skill, add_pay_min, add_pay_max, add_work_day;
     private ImageButton add_done_id, add_cancel_id;
     private Calendar calendar = Calendar.getInstance();
     String [] listItems;
@@ -59,7 +65,7 @@ public class CaseInsertFragment extends Fragment {
         findViews(view);
         setHasOptionsMenu(true);
         // Spinner
-        ArrayAdapter<CharSequence> cityAdapter = ArrayAdapter.createFromResource(
+        final ArrayAdapter<CharSequence> cityAdapter = ArrayAdapter.createFromResource(
                 getActivity(), R.array.city, android.R.layout.simple_spinner_item);
         citySpinner.setAdapter(cityAdapter);
 
@@ -103,7 +109,29 @@ public class CaseInsertFragment extends Fragment {
                                 if(i != categoryItems.size() - 1) {
                                     item = item + " , ";
                                 }
+                            if (Common.networkConnected(getActivity())) {
+                                String url = Common.URL + "/SohoServlet";
+                                JsonObject jsonObject = new JsonObject();
+                                jsonObject.addProperty("action", "categoryInsert");
+//                                jsonObject.addProperty("case", gson.toJson());
+                                jsonObject.addProperty("user_id",1);
+                                int count = 0;
+                                try {
+                                    String result = new MyTask(url, jsonObject.toString()).execute().get();
+                                    count = Integer.valueOf(result);
+                                } catch (Exception e) {
+                                    Log.e(TAG, e.toString());
+                                }
+                                if (count == 0) {
+                                    Common.showToast(getActivity(), R.string.msg_InsertFail);
+                                } else {
+                                    Common.showToast(getActivity(), R.string.msg_InsertSuccess);
+                                }
+                            } else {
+                                Common.showToast(getActivity(), R.string.msg_NoNetwork);
+                            }
                         }
+
                         add_tvCategory.setText(item);
                     }
                 });
@@ -117,7 +145,60 @@ public class CaseInsertFragment extends Fragment {
                 alertDialog.show();
             }
         });
-
+        //  輸入公司統編找地址
+        add_btCompany.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                final EditText alert_etCompany = new EditText(getActivity());
+                alert_etCompany.setInputType(InputType.TYPE_CLASS_NUMBER);
+                builder.setTitle("請輸入公司統編");
+                alert_etCompany.setHint("8個號碼");
+                builder.setView(alert_etCompany);
+                builder.setCancelable(false);
+                builder.setPositiveButton("確認", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Gson gson = new Gson();
+                        Company com = null;
+                            String company = alert_etCompany.getText().toString().trim();
+                            if (Common.networkConnected(getActivity())) {
+                                String url = Common.URL + "/SohoServlet";
+                                JsonObject jsonObject = new JsonObject();
+                                jsonObject.addProperty("action", "search");
+                                jsonObject.addProperty("company", company);
+                                String result = "";
+                                try {
+                                    result = new MyTask(url, jsonObject.toString()).execute().get();
+                                    com = gson.fromJson(result, Company.class);
+                                } catch (Exception e) {
+                                    Log.e(TAG, e.toString());
+                                }  if (result.isEmpty()) {
+                                    Common.showToast(getActivity(), R.string.msg_InsertFail);
+                                } else {
+                                    Common.showToast(getActivity(), R.string.msg_InsertSuccess);
+                                    Geocoder geocoder = new Geocoder(getActivity(), Locale.TRADITIONAL_CHINESE);
+                                    try {
+                                        List<Address> addressList = geocoder.getFromLocation(com.getLatitude(), com.getLongitude(),2);
+                                        String returnAddress = addressList.get(0).getAddressLine(0);
+                                        add_tvCompany.setText(returnAddress);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                    }
+                });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
 
         // toolbar done and cancel
         add_done_id.setOnClickListener(new View.OnClickListener() {
@@ -131,19 +212,24 @@ public class CaseInsertFragment extends Fragment {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+
                 String checkCategory = add_tvCategory.getText().toString();
                 String city = citySpinner.getSelectedItem().toString();
-                String caseTitle = add_case.getText().toString().trim();
+                String caseName = add_case.getText().toString().trim();
                 String content = add_content.getText().toString().trim();
                 String skill = add_skill.getText().toString().trim();
-                int budget = Integer.parseInt(add_budget.getText().toString().trim());
+                String workDay = add_work_day.getText().toString().trim();
+                int payMin = Integer.parseInt(add_pay_min.getText().toString().trim());
+                int payMax = Integer.parseInt(add_pay_max.getText().toString().trim());
                 if (Common.networkConnected(getActivity())) {
-                    String url = Common.URL + "/CaseServlet";
-                    myCase myCase = new myCase(0, budget, caseTitle, skill, city, content ,expire, checkCategory);
+                    String url = Common.URL + "/SohoServlet";
+
+                    myCase myCase = new myCase(0,caseName, (java.sql.Date) expire,workDay,payMin,payMax,content,city);
+
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action", "caseInsert");
                     jsonObject.addProperty("case", gson.toJson(myCase));
-                    jsonObject.addProperty("user_id",4);
+                    jsonObject.addProperty("user_id",1);
                     int count = 0;
                     try {
                         String result = new MyTask(url, jsonObject.toString()).execute().get();
@@ -193,9 +279,14 @@ public class CaseInsertFragment extends Fragment {
         add_content = view.findViewById(R.id.add_content);
         add_expire = view.findViewById(R.id.add_expire);
         add_skill = view.findViewById(R.id.add_skill);
-        add_budget = view.findViewById(R.id.add_budget);
+        add_pay_min = view.findViewById(R.id.add_pay_min);
+        add_pay_max = view.findViewById(R.id.add_pay_max);
+        add_btCompany = view.findViewById(R.id.add_btCompany);
+        add_tvCompany = view.findViewById(R.id.add_tvCompany);
+        add_work_day = view.findViewById(R.id.add_work_day);
         add_btCagetory = view.findViewById(R.id.add_btCagetory);
         add_tvCategory = view.findViewById(R.id.add_tvCagetory);
+
     }
 
 }

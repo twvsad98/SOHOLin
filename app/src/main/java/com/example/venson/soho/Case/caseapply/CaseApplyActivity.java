@@ -18,12 +18,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CaseApplyActivity extends AppCompatActivity {
-//
 
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.caseapply_layout);
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
+        tabLayout.setupWithViewPager(viewPager);
+
 
     }
 }

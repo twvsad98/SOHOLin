@@ -31,11 +31,11 @@ public class CaseApplyFragment extends Fragment {
         if (getArguments() != null) {
             caseData = (CaseData) getArguments().getSerializable("caseinfo");
         }
-        TextView tvCaseName = view.findViewById(R.id.tvCaseName);
-        tvCaseName.setText(caseData.getCasename());
-
-        TextView tvCaseNeed = view.findViewById(R.id.tvCaseNeed);
-        tvCaseNeed.setText(caseData.getCaseneed());
+//        TextView tvCaseName = view.findViewById(R.id.tvCaseName);
+//        tvCaseName.setText(caseData.getCasename());
+//
+//        TextView tvCaseNeed = view.findViewById(R.id.tvCaseNeed);
+//        tvCaseNeed.setText(caseData.getCaseneed());
         return view;
     }
 }

@@ -11,15 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.example.venson.soho.Common.Common;
 import com.example.venson.soho.Home.HomeFragment;
 import com.example.venson.soho.LoginRegist.UserRegistTask;
-import com.example.venson.soho.Member.User;
-
-import java.util.concurrent.ExecutionException;
 
 public class RegistFragment extends Fragment {
     private final static String TAG = "RegistFragment";
@@ -91,10 +86,10 @@ public class RegistFragment extends Fragment {
 
                 if (isInputValid) {
                     String url = Common.URL + "Login_RegistServlet";
-                    User user = new User(email, password, name,gender);
+//                    User user = new User(email, password, name,gender);
                     int count = 0;
                     try {
-                        count = new UserRegistTask().execute(url, "insert", user).get();
+//                        count = new UserRegistTask().execute(url, "insert", user).get();
                     } catch (Exception e) {
                         Log.e(TAG, e.toString());
                     }
