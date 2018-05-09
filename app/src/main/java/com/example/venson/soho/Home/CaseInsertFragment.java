@@ -22,22 +22,16 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.venson.soho.CaseCategory;
-import com.example.venson.soho.CaseCompany;
-import com.example.venson.soho.CaseTag;
-import com.example.venson.soho.Category;
 import com.example.venson.soho.Common;
 import com.example.venson.soho.Company;
+import com.example.venson.soho.MyCase;
 import com.example.venson.soho.MyTask;
 import com.example.venson.soho.R;
-import com.example.venson.soho.myCase;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -96,7 +90,6 @@ public class CaseInsertFragment extends Fragment {
                         } else {
                             categoryItems.remove(Integer.valueOf(position));
                             }
-
                         }
                 });
                 builder.setCancelable(false);
@@ -109,29 +102,7 @@ public class CaseInsertFragment extends Fragment {
                                 if(i != categoryItems.size() - 1) {
                                     item = item + " , ";
                                 }
-                            if (Common.networkConnected(getActivity())) {
-                                String url = Common.URL + "/SohoServlet";
-                                JsonObject jsonObject = new JsonObject();
-                                jsonObject.addProperty("action", "categoryInsert");
-//                                jsonObject.addProperty("case", gson.toJson());
-                                jsonObject.addProperty("user_id",1);
-                                int count = 0;
-                                try {
-                                    String result = new MyTask(url, jsonObject.toString()).execute().get();
-                                    count = Integer.valueOf(result);
-                                } catch (Exception e) {
-                                    Log.e(TAG, e.toString());
-                                }
-                                if (count == 0) {
-                                    Common.showToast(getActivity(), R.string.msg_InsertFail);
-                                } else {
-                                    Common.showToast(getActivity(), R.string.msg_InsertSuccess);
-                                }
-                            } else {
-                                Common.showToast(getActivity(), R.string.msg_NoNetwork);
-                            }
                         }
-
                         add_tvCategory.setText(item);
                     }
                 });
@@ -179,7 +150,7 @@ public class CaseInsertFragment extends Fragment {
                                     Common.showToast(getActivity(), R.string.msg_InsertSuccess);
                                     Geocoder geocoder = new Geocoder(getActivity(), Locale.TRADITIONAL_CHINESE);
                                     try {
-                                        List<Address> addressList = geocoder.getFromLocation(com.getLatitude(), com.getLongitude(),2);
+                                        List<Address> addressList = geocoder.getFromLocation(com.getLatitude(), com.getLongitude(),1);
                                         String returnAddress = addressList.get(0).getAddressLine(0);
                                         add_tvCompany.setText(returnAddress);
                                     } catch (IOException e) {
@@ -213,7 +184,6 @@ public class CaseInsertFragment extends Fragment {
                     e.printStackTrace();
                 }
 
-                String checkCategory = add_tvCategory.getText().toString();
                 String city = citySpinner.getSelectedItem().toString();
                 String caseName = add_case.getText().toString().trim();
                 String content = add_content.getText().toString().trim();
@@ -223,12 +193,12 @@ public class CaseInsertFragment extends Fragment {
                 int payMax = Integer.parseInt(add_pay_max.getText().toString().trim());
                 if (Common.networkConnected(getActivity())) {
                     String url = Common.URL + "/SohoServlet";
-
-                    myCase myCase = new myCase(0,caseName, (java.sql.Date) expire,workDay,payMin,payMax,content,city);
+                    MyCase myCase = new MyCase(0,caseName, (java.sql.Date) expire,payMin,payMax,content,city);
 
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action", "caseInsert");
                     jsonObject.addProperty("case", gson.toJson(myCase));
+                    jsonObject.addProperty("caseTags", skill);
                     jsonObject.addProperty("user_id",1);
                     int count = 0;
                     try {

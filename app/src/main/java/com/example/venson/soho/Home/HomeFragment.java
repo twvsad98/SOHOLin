@@ -32,9 +32,9 @@ import com.example.venson.soho.Home.CategoryTab.NetWorkFragment;
 import com.example.venson.soho.Home.CategoryTab.SalesFragment;
 import com.example.venson.soho.Home.CategoryTab.ServiceFragment;
 import com.example.venson.soho.Home.CategoryTab.TranslationFragment;
+import com.example.venson.soho.MyCase;
 import com.example.venson.soho.MyTask;
 import com.example.venson.soho.R;
-import com.example.venson.soho.myCase;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private MyTask caseGetAllTask,caseTagTask;
     private RecyclerView rvCase;
-    private static List<myCase> myCases = new ArrayList<>();
+    private static List<MyCase> myCases = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -200,7 +200,7 @@ public class HomeFragment extends Fragment {
             try {
                 String jsonIn = caseGetAllTask.execute().get();
                 Log.d(TAG, jsonIn);
-                Type listType = new TypeToken<List<myCase>>() {
+                Type listType = new TypeToken<List<MyCase>>() {
                 }.getType();
                 myCases = gson.fromJson(jsonIn, listType);
             } catch (Exception e) {
@@ -221,7 +221,7 @@ public class HomeFragment extends Fragment {
         private LayoutInflater layoutInflater;
 
 
-        getCaseAdapter(List<myCase> myCases, Context context) {
+        getCaseAdapter(List<MyCase> myCases, Context context) {
             layoutInflater = LayoutInflater.from(context);
             HomeFragment.myCases = myCases;
         }
@@ -248,20 +248,19 @@ public class HomeFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(getCaseAdapter.MyViewHolder myViewHolder, int position) {
-            final myCase myCase = myCases.get(position);
+            final MyCase myCase = myCases.get(position);
             List<CaseTag> caseTags = new ArrayList<>();
             if (Common.networkConnected(getActivity())) {
                 String url = Common.URL + "/SohoServlet";
                 JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("caseId", myCase.getCaseId());
                 jsonObject.addProperty("action", "caseTags");
+                jsonObject.addProperty("caseId", myCase.getCaseId());
                 String jsonOut = jsonObject.toString();
                 caseTagTask = new MyTask(url, jsonOut);
                 try {
                     String jsonIn = caseTagTask.execute().get();
                     Log.d(TAG, jsonIn);
-                    Type listType = new TypeToken<List<CaseTag>>() {
-                    }.getType();
+                    Type listType = new TypeToken<List<CaseTag>>() {}.getType();
                     caseTags = new Gson().fromJson(jsonIn, listType);
                 } catch (Exception e) {
                     Log.e(TAG, e.toString());
@@ -272,7 +271,7 @@ public class HomeFragment extends Fragment {
                 } else {
                     String text="";
                     for(int i = 0; i<caseTags.size(); i++) {
-                        text+=caseTags.get(i).getName();
+                        text += caseTags.get(i).getName();
                     }
                     myViewHolder.case_skill.setText(text + " ");
                 }
