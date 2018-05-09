@@ -2,12 +2,23 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="6dp" />
+    <Button
+        android:id="@+id/btSetLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="logout"/>
+    <Button
+        android:id="@+id/btSetLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="login"/>
 
 </LinearLayout>

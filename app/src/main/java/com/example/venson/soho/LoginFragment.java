@@ -13,8 +13,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+
 import com.example.venson.soho.Home.HomeFragment;
 import com.example.venson.soho.LoginRegist.UserExistTask;
+import com.example.venson.soho.Message.MessageFragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -25,7 +27,7 @@ public class LoginFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.login_layout,container ,false);
+       final View view = inflater.inflate(R.layout.login_layout,container ,false);
         login_look = view.findViewById(R.id.login_look);
         login_look.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +40,8 @@ public class LoginFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+        final MainActivity activity = (MainActivity) getActivity();
+
 
         ////////////登入按鈕  檢查 成功 進入主頁
         btLogin = view.findViewById(R.id.login_btLogin);
@@ -54,16 +58,16 @@ public class LoginFragment extends Fragment {
                     return;
                 }
                 if (isUser(email, password)) {
-                    /////////////////////
                     SharedPreferences preferences = getActivity().getSharedPreferences(
                             Common.PREF_FILE, MODE_PRIVATE);
                     preferences.edit().putBoolean("login", true)
                             .putString("email", email)
                             .putString("password", password).apply();
-                    ////////////////////
+
                     getActivity().setResult(Activity.RESULT_OK);
-                    Fragment fragment = new HomeFragment();
-                    getFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.content, fragment).commit();
+                    Fragment fragment = new MessageFragment();
+                    getFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
+
                 } else {
                     tvEmail.setError("email or passwrod is wrong");
                     tvPassword.setError(" email or password is wrong");
@@ -82,7 +86,9 @@ public class LoginFragment extends Fragment {
             }
         });
 
+
         return view;
+
     }
            ///已經登入時，自動登入
     @Override

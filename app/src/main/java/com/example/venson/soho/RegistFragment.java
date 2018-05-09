@@ -13,17 +13,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
+
 import com.example.venson.soho.Home.HomeFragment;
+import com.example.venson.soho.LoginRegist.CommonTask;
+import com.example.venson.soho.LoginRegist.UserExistTask;
 import com.example.venson.soho.LoginRegist.UserRegistTask;
+import com.example.venson.soho.Member.User;
+import com.google.gson.JsonObject;
+
+import java.util.concurrent.ExecutionException;
 
 public class RegistFragment extends Fragment {
     private final static String TAG = "RegistFragment";
     private EditText etEmail, etPassword, etConfirmPassword, etName;
     private Button btRegister;
-    private boolean userExit = false;
+    private boolean userEmailExist = false;
     boolean isInputValid = true;
     private RadioGroup rgSex;
     private int gender =1;
+    private CommonTask emailCheckTask;
+
 
     @Nullable
     @Override
@@ -35,7 +44,6 @@ public class RegistFragment extends Fragment {
         etName = view.findViewById(R.id.etName);
         btRegister = view.findViewById(R.id.btRegister);
         rgSex = view.findViewById(R.id.rgSex);
-
         rgSex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -51,6 +59,40 @@ public class RegistFragment extends Fragment {
             }
         });
 
+//        etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (!hasFocus){
+                        String email = etEmail.getText().toString();
+                        String password = etPassword.getText().toString();
+                        String url = Common.URL + "/Login_RegistServlet";
+                        JsonObject jsonObject = new JsonObject();
+                        jsonObject.addProperty("action", "userExist");
+                        jsonObject.addProperty("email", email);
+                        jsonObject.addProperty("password", password);
+                        String jsonOut = jsonObject.toString();
+                        emailCheckTask = new CommonTask(url, jsonOut);
+                        try {
+                            String result = emailCheckTask.execute().get();
+                            userEmailExist = Boolean.valueOf(result);
+                        } catch (Exception e) {
+                            Log.e(TAG, e.toString());
+                        }
+
+                        if (userEmailExist) {
+                           etEmail.setError("email or password is exist");
+                           etPassword.setError("email or password is exist");
+                        }else{
+                            isInputValid = true;
+                        }
+//                    }
+
+//            }
+//        });
+
+
+
+
 
 
         //////註冊按鈕
@@ -63,9 +105,18 @@ public class RegistFragment extends Fragment {
                 String name = etName.getText().toString().trim();
 
 
-                if (userExit) {
+                if(!isVaildEmailFormat(email)){
+                    etEmail.setError("invaild email address");
                     isInputValid = false;
+                } else {
+                    isInputValid = true;
                 }
+                if (userEmailExist){
+                    isInputValid = false;
+                }else{
+                    isInputValid = true;
+                }
+
                 if (email.isEmpty()) {
 
                     isInputValid = false;
@@ -86,10 +137,10 @@ public class RegistFragment extends Fragment {
 
                 if (isInputValid) {
                     String url = Common.URL + "Login_RegistServlet";
-//                    User user = new User(email, password, name,gender);
+                    User user = new User(email, password, name,gender);
                     int count = 0;
                     try {
-//                        count = new UserRegistTask().execute(url, "insert", user).get();
+                        count = new UserRegistTask().execute(url, "insert", user).get();
                     } catch (Exception e) {
                         Log.e(TAG, e.toString());
                     }
@@ -110,6 +161,14 @@ public class RegistFragment extends Fragment {
 
 
         return view;
+    }
+    private boolean isVaildEmailFormat(String email)
+    {
+
+        if (email == null) {
+            return false;
+        }
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(etEmail.getText().toString()).matches();
     }
 
 
