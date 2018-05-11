@@ -20,7 +20,7 @@
                 android:layout_margin="15dp"
                 android:ems="10"
                 android:hint="@string/電子郵件"
-                android:inputType="text" />
+                android:inputType="textEmailAddress" />
 
             <EditText
                 android:id="@+id/etPassword"

@@ -4,25 +4,39 @@
     android:layout_height="wrap_content"
     android:padding="2dp">
 
-    <LinearLayout
+
+    <TextView
+        android:id="@+id/tvChatUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="Test"
-            android:textColor="#990000"
-            android:textSize="20sp" />
+        android:text="bob"
+        android:textColor="#990000"
+        android:textSize="20sp"
+        android:layout_marginLeft="12dp"/>
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_below="@+id/tvChatUserName"
+        >
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
+            android:src="@drawable/chat_user_profile"
             />
+
     </LinearLayout>
+    <TextView
+        android:id="@+id/tvChatMessageT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/linearLayout"
+        android:text="11:40"
+        android:layout_alignBottom="@id/linearLayout"
+        android:layout_marginLeft="4dp"
+        />
 </RelativeLayout>

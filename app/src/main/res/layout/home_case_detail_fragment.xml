@@ -4,13 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingStart="3dp"
+
     >
+
+
     <include
-        layout="@layout/title_tool_bar">
+        layout="@layout/title_tool_bar"/>
 
-
-    </include>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="3dp"
+        android:layout_marginStart="3dp"
+        >
 
     <LinearLayout
         android:layout_marginStart="5dp"
@@ -30,6 +40,7 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         >
 
         <LinearLayout
@@ -42,28 +53,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:layout_margin="4dp"
                 android:text="案件:"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:layout_margin="4dp"
+                android:layout_marginTop="10dp"
                 android:text="地點:"
                 />
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="18sp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:text="類型:"-->
+                <!--/>-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:layout_margin="4dp"
-                android:text="類型:"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:layout_margin="4dp"
+                android:layout_marginTop="10dp"
                 android:text="內容:"
                 />
 
@@ -72,14 +82,15 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            >
 
             <TextView
                 android:id="@+id/case_detail_tvCase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:layout_margin="4dp"
                 android:hint="案件"
                 />
             <TextView
@@ -87,23 +98,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:layout_margin="4dp"
+                android:layout_marginTop="10dp"
                 android:hint="地點"
                 />
-            <TextView
-                android:id="@+id/case_detail_tvCagetory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:layout_margin="4dp"
-                android:hint="類型"
-                />
+            <!--<TextView-->
+                <!--android:id="@+id/case_detail_tvCagetory"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="18sp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:hint="類型"-->
+                <!--/>-->
             <TextView
                 android:id="@+id/case_detail_tvConten"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:layout_margin="4dp"
+                android:layout_marginTop="10dp"
                 android:hint="內容"
                 />
         </LinearLayout>
@@ -111,17 +122,40 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="時間"
             android:textSize="20dp"
-            android:textStyle="bold"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="4dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="發佈日:"
             />
+        <TextView
+            android:id="@+id/case_detail_tvRelease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginStart="6dp"
+            android:hint="發佈日"
+            />
+
     </LinearLayout>
 
     <LinearLayout
@@ -130,10 +164,12 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="4dp"
         >
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:layout_marginTop="10dp"
             android:text="截止日:"
             />
         <TextView
@@ -142,7 +178,34 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:layout_marginStart="6dp"
+            android:layout_marginTop="10dp"
             android:hint="截止日"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="4dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:text="完成工作所需時間:"
+            />
+        <TextView
+            android:id="@+id/case_detail_tvWrokDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="10dp"
+            android:hint="完成工作日"
             />
 
     </LinearLayout>
@@ -174,7 +237,22 @@
             android:text="預算:"
             />
         <TextView
-            android:id="@+id/case_detail_tvBudget"
+            android:id="@+id/case_detail_tvPay_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginStart="6dp"
+            android:hint="預算"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginStart="6dp"
+            android:text="-"
+            />
+        <TextView
+            android:id="@+id/case_detail_tvPay_max"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
@@ -221,6 +299,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="公司"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="4dp"
+        >
+        <TextView
+            android:id="@+id/case_detail_tvCompany"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginStart="6dp"
+            android:hint="公司資訊"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -248,7 +357,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         >
         <Button
@@ -260,4 +369,6 @@
 
     </LinearLayout>
 
+    </LinearLayout>
+    </ScrollView>
 </LinearLayout>

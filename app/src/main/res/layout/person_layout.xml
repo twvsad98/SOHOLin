@@ -54,7 +54,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
+
+
+                <TextView
                     android:id="@+id/eTName"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -122,6 +124,12 @@
                     android:layout_height="24dp"
                     android:layout_marginStart="40dp"
                     android:background="@drawable/evaluation" />
+                <Button
+                    android:id="@+id/btEdit"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="40dp"
+                    android:background="@drawable/edit"/>
 
             </LinearLayout>
 
@@ -135,55 +143,55 @@
                 android:orientation="vertical"
                 android:paddingBottom="50dp">
 
-                <EditText
+                <TextView
                     android:id="@+id/etCompany"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:hint="@string/etCompany"
-                    android:inputType="textPersonName" />
+                     />
 
-                <EditText
+                <TextView
                     android:id="@+id/etWorkExperience"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:hint="@string/etWorkExperience"
-                    android:inputType="textPersonName" />
+                     />
 
-                <EditText
+                <TextView
                     android:id="@+id/etExpertise"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:hint="@string/etExpertise"
-                    android:inputType="textPersonName" />
+                     />
 
-                <EditText
+                <TextView
                     android:id="@+id/etLive"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:hint="@string/etLive"
-                    android:inputType="textPersonName" />
+                     />
 
-                <EditText
+                <TextView
                     android:id="@+id/etPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:hint="@string/etPhone"
-                    android:inputType="phone" />
+                    />
 
-                <EditText
+                <TextView
                     android:id="@+id/etLine"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:hint="@string/etLine"
-                    android:inputType="textPersonName" />
+                     />
             </LinearLayout>
 
         </LinearLayout>
