@@ -149,30 +149,17 @@
                         android:text="公司"
                         android:textSize="20sp"
                         />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        >
-
-                    <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_edit_black_24dp"
-                        android:background="@color/white"
-                        />
-                </LinearLayout>
 
                 </LinearLayout>
 
 
                 <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="公司"
-                android:textSize="20sp"
-                android:layout_marginStart="20dp"
-                />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="公司"
+                    android:textSize="20sp"
+                    android:layout_marginStart="20dp"
+                    />
 
             </LinearLayout>
 

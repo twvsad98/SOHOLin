@@ -53,7 +53,6 @@ public class CaseDetailFragment extends Fragment {
         User user = null;
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
         myCase = (MyCase) getArguments().getSerializable("myCase");
-
         if (Common.networkConnected(getActivity())) {
             String url = Common.URL + "/SohoServlet";
             JsonObject jsonObject = new JsonObject();
@@ -66,7 +65,7 @@ public class CaseDetailFragment extends Fragment {
             } catch (Exception e) {
                 Log.e(TAG, e.toString());
             }  if (user == null) {
-                Common.showToast(getActivity(), R.string.msg_InsertFail);
+//                Common.showToast(getActivity(), R.string.msg_InsertFail);
             } else {
                 detail_tvUser.setText(user.getUserName());
             }
@@ -88,7 +87,7 @@ public class CaseDetailFragment extends Fragment {
             } catch (Exception e) {
                 Log.e(TAG, e.toString());
             }  if (caseTags == null) {
-                Common.showToast(getActivity(), R.string.msg_InsertFail);
+//                Common.showToast(getActivity(), R.string.msg_InsertFail);
             } else {
                 String text = "";
                 for (int i = 0; i < caseTags.size(); i++){
@@ -97,7 +96,7 @@ public class CaseDetailFragment extends Fragment {
                 detail_tvSkill.setText(text);
             }
         }
-        
+
         if (Common.networkConnected(getActivity())) {
             Company com = null;
             String url = Common.URL + "/SohoServlet";
@@ -113,7 +112,7 @@ public class CaseDetailFragment extends Fragment {
             }  if (result.isEmpty()) {
                 Common.showToast(getActivity(), R.string.msg_InsertFail);
             } else {
-                Common.showToast(getActivity(), R.string.msg_InsertSuccess);
+//                Common.showToast(getActivity(), R.string.msg_InsertSuccess);
                 Geocoder geocoder = new Geocoder(getActivity(), Locale.TRADITIONAL_CHINESE);
                 try {
                     List<Address> addressList = geocoder.getFromLocation(com.getLatitude(), com.getLongitude(),1);

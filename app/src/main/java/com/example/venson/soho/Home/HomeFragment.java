@@ -67,6 +67,7 @@ public class HomeFragment extends Fragment {
         getCase_mamber_tabLayout();
         return view;
     }
+    
     // work category
     public TabLayout getCag_tablayout() {
         cag_tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

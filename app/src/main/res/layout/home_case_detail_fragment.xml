@@ -245,6 +245,13 @@
             android:hint="預算"
             />
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginStart="6dp"
+            android:text="-"
+            />
+        <TextView
             android:id="@+id/case_detail_tvPay_max"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

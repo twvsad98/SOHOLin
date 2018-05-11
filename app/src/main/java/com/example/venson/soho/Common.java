@@ -19,13 +19,11 @@ import java.util.List;
 public class Common {
 
     private static final String TAG = "Common";
-//    public static String URL = "http://192.168.196.189:8080/Spot_MySQL_Web/";
-//    public static String URL = "http://10.0.2.2:8080/SOHO";
 
     // check if the device connect to the network
-    public static String URL = "http://10.0.2.2:8080/Test_Project_User/";
-    public final static String SERVER_URI = "ws://10.0.2.2:8080/Test_Project_User/ChatServlet/";
+    public static String URL = "http://10.0.2.2:8080/AndroidAppServlet/";
 
+    public final static String SERVER_URI = "ws://10.0.2.2:8080/Test_Project_User/ChatServlet/";
     public final static String PREF_FILE = "preference";
 
     public static boolean networkConnected(Activity activity) {
@@ -103,4 +101,5 @@ public class Common {
         }
         return srcBitmap;
     }
+
 }

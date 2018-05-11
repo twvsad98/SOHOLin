@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.venson.soho.Common;
 import com.example.venson.soho.Company;
@@ -133,31 +134,35 @@ public class CaseInsertFragment extends Fragment {
                         Gson gson = new Gson();
                         Company com = null;
                             String company = alert_etCompany.getText().toString().trim();
-                            if (Common.networkConnected(getActivity())) {
-                                String url = Common.URL + "/SohoServlet";
-                                JsonObject jsonObject = new JsonObject();
-                                jsonObject.addProperty("action", "search");
-                                jsonObject.addProperty("company", company);
-                                String result = "";
-                                try {
-                                    result = new MyTask(url, jsonObject.toString()).execute().get();
-                                    com = gson.fromJson(result, Company.class);
-                                } catch (Exception e) {
-                                    Log.e(TAG, e.toString());
-                                }  if (result.isEmpty()) {
-                                    Common.showToast(getActivity(), R.string.msg_InsertFail);
-                                } else {
-                                    Common.showToast(getActivity(), R.string.msg_InsertSuccess);
-                                    Geocoder geocoder = new Geocoder(getActivity(), Locale.TRADITIONAL_CHINESE);
+                            if (company.isEmpty() || company.length() <= 8) {
+                               Common.showToast(getActivity(), "請輸入8個數字");
+
+                            } else if (Common.networkConnected(getActivity())) {
+                                    String url = Common.URL + "/SohoServlet";
+                                    JsonObject jsonObject = new JsonObject();
+                                    jsonObject.addProperty("action", "search");
+                                    jsonObject.addProperty("company", company);
+                                    String result = "";
                                     try {
-                                        List<Address> addressList = geocoder.getFromLocation(com.getLatitude(), com.getLongitude(),1);
-                                        String returnAddress = addressList.get(0).getAddressLine(0);
-                                        add_tvCompany.setText(returnAddress);
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
+                                        result = new MyTask(url, jsonObject.toString()).execute().get();
+                                        com = gson.fromJson(result, Company.class);
+                                    } catch (Exception e) {
+                                        Log.e(TAG, e.toString());
+                                    }
+                                    if (result.isEmpty()) {
+                                        Common.showToast(getActivity(), R.string.msg_InsertFail);
+                                    } else {
+                                        Common.showToast(getActivity(), R.string.msg_InsertSuccess);
+                                        Geocoder geocoder = new Geocoder(getActivity(), Locale.TRADITIONAL_CHINESE);
+                                        try {
+                                            List<Address> addressList = geocoder.getFromLocation(com.getLatitude(), com.getLongitude(), 1);
+                                            String returnAddress = addressList.get(0).getAddressLine(0);
+                                            add_tvCompany.setText(returnAddress);
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
                                 }
-                            }
                     }
                 });
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
