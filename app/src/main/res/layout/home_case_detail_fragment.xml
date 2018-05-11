@@ -4,13 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingStart="3dp"
+
     >
+
+
     <include
-        layout="@layout/title_tool_bar">
+        layout="@layout/title_tool_bar"/>
 
-
-    </include>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="3dp"
+        android:layout_marginStart="3dp"
+        >
 
     <LinearLayout
         android:layout_marginStart="5dp"
@@ -235,6 +245,13 @@
             android:hint="預算"
             />
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginStart="6dp"
+            android:text="-"
+            />
+        <TextView
             android:id="@+id/case_detail_tvPay_max"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -282,13 +299,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="公司"
             android:textSize="20dp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -340,7 +357,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         >
         <Button
@@ -352,4 +369,6 @@
 
     </LinearLayout>
 
+    </LinearLayout>
+    </ScrollView>
 </LinearLayout>
