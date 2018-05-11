@@ -47,9 +47,6 @@ public class CaseInsertFragment extends Fragment {
         findViews(view);
         setHasOptionsMenu(true);
         // Spinner
-        ArrayAdapter<CharSequence> cagetoryAdapter = ArrayAdapter.createFromResource(
-                getActivity(), R.array.cagetory, android.R.layout.simple_spinner_item);
-        cagetorySpinner.setAdapter(cagetoryAdapter);
         ArrayAdapter<CharSequence> cityAdapter = ArrayAdapter.createFromResource(
                 getActivity(), R.array.city, android.R.layout.simple_spinner_item);
         citySpinner.setAdapter(cityAdapter);
@@ -138,7 +135,6 @@ public class CaseInsertFragment extends Fragment {
         add_done_id = view.findViewById(R.id.add_done_id);
         add_cancel_id = view.findViewById(R.id.add_cancel_id);
         add_case = view.findViewById(R.id.add_case);
-        cagetorySpinner = view.findViewById(R.id.spinner_cagetory_id);
         add_content = view.findViewById(R.id.add_content);
         add_expire = view.findViewById(R.id.add_expire);
         add_skill = view.findViewById(R.id.add_skill);

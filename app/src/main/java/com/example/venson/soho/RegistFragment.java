@@ -11,15 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.example.venson.soho.Common.Common;
 import com.example.venson.soho.Home.HomeFragment;
 import com.example.venson.soho.LoginRegist.UserRegistTask;
 import com.example.venson.soho.Member.User;
-
-import java.util.concurrent.ExecutionException;
 
 public class RegistFragment extends Fragment {
     private final static String TAG = "RegistFragment";

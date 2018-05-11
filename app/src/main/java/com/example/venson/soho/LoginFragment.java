@@ -12,10 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.example.venson.soho.Common.Common;
-import com.example.venson.soho.Home.AddCaseFragment;
 import com.example.venson.soho.Home.HomeFragment;
 import com.example.venson.soho.LoginRegist.UserExistTask;
 
@@ -28,7 +25,7 @@ public class LoginFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.login_layout,container ,false);
+        final View view = inflater.inflate(R.layout.login_layout,container ,false);
         login_look = view.findViewById(R.id.login_look);
         login_look.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +83,6 @@ public class LoginFragment extends Fragment {
         });
 
 
-        return view;
         return view;
     }
            ///已經登入時，自動登入
