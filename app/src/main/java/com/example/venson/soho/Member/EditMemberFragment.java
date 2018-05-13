@@ -39,7 +39,7 @@ public class EditMemberFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.edit_person_layout, container, false);
+        View view = inflater.inflate(R.layout.person_layout, container, false);
         findviews(view);
 
 
@@ -139,9 +139,6 @@ public class EditMemberFragment extends Fragment{
                 etName.setText(user.getUserName());
                 etLine.setText(user.getUserLINE());
                 etExpertise.setText(user.getUserSelfDes());
-
-
-
 
             }
          else {
